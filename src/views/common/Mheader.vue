@@ -1,10 +1,10 @@
 <template>
   <div class="m-header">
 	  <el-row class="panel-top">
-	    <el-col :span="18">
+	    <el-col :span="6">
 	    	<h2>车务管理系统</h2>
 	    </el-col>
-	    <el-col :span="6" class="rightbar">
+	    <el-col :span="18" class="rightbar">
 	    	<p>
 	    		<span style="padding-right: 15px">{{roleName}}<em style="padding:0 5px">-</em>{{username}}</span>
 	    		<a href="javascript:" @click="logout">退出系统</a>

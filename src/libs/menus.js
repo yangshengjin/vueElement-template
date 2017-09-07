@@ -3,7 +3,7 @@ let menus = []
 try {
   menus = window.localStorage.getItem('menus')
   menus = JSON.parse(menus)
-  Error
+  window.error()
 } catch (e) {
   menus = [
     {

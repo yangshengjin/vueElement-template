@@ -1,4 +1,4 @@
-import * as common from '../../api/common'
+import common from '../../api/common'
 import * as types from '../types'
 
 const state = {

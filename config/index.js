@@ -28,10 +28,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-    	'/lrb-manager': {
-    		target: 'http://lysfc.imwork.net',
-    		changeOrigin: true
-    	}
+      '/lrb-manager': {
+        target: 'http://192.168.2.121',
+        changeOrigin: true
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

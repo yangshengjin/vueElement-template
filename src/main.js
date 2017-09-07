@@ -11,6 +11,34 @@ import mixins from './libs/mixins'
 // 注册全局mixins
 Vue.mixin(mixins)
 import store from './store'
+
+// 实例化Vue的filter
+import filters from './libs/filters'
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
+
+// 自定义指令
+// 获取dom节点
+Vue.directive('dom', {
+  bind: function (el, binding) {
+    var obj = binding.value
+    if (obj != null) {
+      var key = Object.keys(binding.modifiers)[0] || 'el'
+      Vue.set(obj, key, el)
+    }
+  }
+})
+// 只允许输入数字
+Vue.directive('numberOnly', {
+  update: function (el, binding) {
+    el.value = el.value.replace(/\D+/, '')
+  }
+})
+
+/**
+ * 业务API -> 封装成全局变量
+ */
+import common from './api/common'
+Vue.prototype.common = common
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

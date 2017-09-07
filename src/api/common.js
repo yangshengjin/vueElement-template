@@ -15,7 +15,7 @@ function PostLogin (params) {
 function QueryOlderList (params) {
   return fetchApi(API, 'older/list', params)
 }
-export {
+export default {
   PostLogin,
   QueryOlderList
 }
