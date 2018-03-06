@@ -1,4 +1,4 @@
-const API = 'lrb-manager'
+const API = 'cwxt-base-cms'
 const fetchApi = require('./fetch').fetchApi
 
 /**
@@ -12,10 +12,10 @@ function PostLogin (params) {
 /**
  * 查询接口
  */
-function QueryOlderList (params) {
-  return fetchApi(API, 'older/list', params)
+function QueryBusInfo (params) {
+  return fetchApi(API, 'bus_info/list', params)
 }
 export default {
   PostLogin,
-  QueryOlderList
+  QueryBusInfo
 }

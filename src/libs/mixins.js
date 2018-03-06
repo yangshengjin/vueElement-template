@@ -2,19 +2,26 @@
 export default {
   data () {
     return {
-      exVisible: {
-        show: false,
-        path: ''
-      }
+      exportData: { show: false, path: '', reqData: {} },
+      dialogVisible: { status: false, dialogTitle: '' },
+      statusOptions: [{ id: 1, name: '启用' }, { id: 0, name: '停用' }]
     }
   },
   methods: {
-    message (text) {
+    showInfo (text) {
       this.$message({
         message: text,
         type: 'info',
         showClose: true,
         duration: 2000
+      })
+    },
+    showWarning (text) {
+      this.$message({
+        message: text,
+        type: 'warning',
+        showClose: true,
+        duration: 1500
       })
     },
     showSuccess (text) {
@@ -68,35 +75,8 @@ export default {
     parse (model) {
       return JSON.parse(JSON.stringify(model))
     },
-    exportData (path, params) {
-      console.log(this)
-      const h = this.$createElement
-      this.$msgbox({
-        title: '导出类型',
-        message: h('<p>123123</p>'),
-        showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        beforeClose: (action, instance, done) => {
-          if (action === 'confirm') {
-            instance.confirmButtonLoading = true
-            instance.confirmButtonText = '执行中...'
-            setTimeout(() => {
-              done()
-              setTimeout(() => {
-                instance.confirmButtonLoading = false
-              }, 300)
-            }, 3000)
-          } else {
-            done()
-          }
-        }
-      }).then(action => {
-        this.$message({
-          type: 'info',
-          message: 'action: ' + action
-        })
-      })
+    _getModel (model) {
+      return JSON.parse(JSON.stringify(model))
     }
   }
 }

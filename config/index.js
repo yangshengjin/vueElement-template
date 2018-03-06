@@ -28,7 +28,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/lrb-manager': {
+      '/cwxt-base-cms': {
         target: 'http://192.168.2.121',
         changeOrigin: true
       }

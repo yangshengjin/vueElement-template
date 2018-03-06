@@ -4,9 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+// import 'element-ui/lib/theme-default/index.css'
+import '../themes/element-default/index.css'
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+// Vue.use(ElementUI, { size: 'small' })
+
 import mixins from './libs/mixins'
 // 注册全局mixins
 Vue.mixin(mixins)
