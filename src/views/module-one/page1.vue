@@ -55,7 +55,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import mTable from '../../components/CmTable'
+import mTable from '@/components/CmTable'
 import vehicleForm from './dialog/vehicle-form'
 export default {
   components: {

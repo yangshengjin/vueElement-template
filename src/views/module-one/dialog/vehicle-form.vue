@@ -4,42 +4,10 @@
 
       <el-form class="m-form-inline" :model="model" :inline="true" :label-position="'right'" label-width="100px">
 
-        <el-form-item label="下属车队简称">
-          <el-select v-model="model.busPartnerId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in busPartnerOptions" :key="el.id"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="车辆属性">
-          <el-select v-model="model.propertyId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in BusPropertyOptions" :key="el.id"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="车牌号">
           <el-input v-model="model.plateNum"></el-input>
         </el-form-item>
 
-        <el-form-item label="车牌颜色">
-          <el-select v-model="model.plateColorId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in PlateColorOptions" :key="el.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="营运范围">
-          <el-select v-model="model.operationRangeId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in OperationRangeOptions" :key="el.id"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="车型">
-          <el-select v-model="model.busTypeId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in BusTypeOptions" :key="el.id"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="核定座位数">
           <el-input v-model="model.seatNum"></el-input>
         </el-form-item>
@@ -52,19 +20,6 @@
           <el-select v-model="drivingQualification" multiple placeholder="请选择">
             <el-option v-for="item in drivingQualificationOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="运营单位">
-          <el-select v-model="model.operationDeptId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in busPartnerOptions" :key="el.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="结算单位">
-          <el-select v-model="model.checkUnitId">
-            <el-option label="请选择" :value="-1"></el-option>
-            <el-option :label="el.name" :value="el.id" v-for="el in busPartnerOptions" :key="el.id"></el-option>
           </el-select>
         </el-form-item>
 
@@ -126,7 +81,7 @@ export default {
       loading: false,
       long_use: false,
       model: {
-        mainBusPartnerId: -1,
+        mainBusPartnerId: 2,
         busPartnerId: -1,
         propertyId: -1,
         plateNum: '',
@@ -165,66 +120,13 @@ export default {
   computed: {
     dialogTitle () {
       return this.formModel.id > 0 ? '修改车辆' : '新增车辆'
-    },
-    busPartnerOptions () {
-      return this.$store.state.responseData.busPartnerOptions
-    },
-    BusPropertyOptions () {
-      return this.$store.state.responseData.BusPropertyOptions
-    },
-    OperationRangeOptions () {
-      return this.$store.state.responseData.OperationRangeOptions
-    },
-    BusTypeOptions () {
-      return this.$store.state.responseData.BusTypeOptions
-    },
-    PlateColorOptions () {
-      return this.$store.state.responseData.PlateColorOptions
     }
   },
   methods: {
-    watchMainBusPartner () {
-      this.unwatch = this.$watch('model.mainBusPartnerId', (newVal, oldVal) => {
-        this.model.busPartnerId = -1
-        this.model.propertyId = -1
-        this.model.plateColorId = -1
-        this.model.operationRangeId = -1
-        this.model.busTypeId = -1
-        this.model.operationDeptId = -1
-        this.model.checkUnitId = -1
-        this.getParams(newVal)
-      })
-    },
-    getParams (newVal, init) {
-      // 所有下拉
-      return this.base.BusInfoOption({ mainBusPartnerId: newVal }).then(res => {
-        this.$store.commit('busPartnerOptions', { param: res.busPartnersParams })
-        this.$store.commit('BusPropertyOptions', { param: res.busPropertyParams })
-        this.$store.commit('OperationRangeOptions', { param: res.operationRangeParams })
-        this.$store.commit('BusTypeOptions', { param: res.busTypeParams })
-        this.$store.commit('PlateColorOptions', { param: res.plateColorParams })
-      })
-    },
     validate (model) {
       let flag = false
       if (model.mainBusPartnerId <= 0) {
         this.showWarning('请选择主营车队')
-      } else if (model.busPartnerId <= 0) {
-        this.showWarning('请选择下属车队')
-      } else if (model.propertyId <= 0) {
-        this.showWarning('请选择车辆属性')
-      } else if (model.plateNum === '') {
-        this.showWarning('请填写车牌号')
-      } else if (model.plateColorId <= 0) {
-        this.showWarning('请选择车牌颜色')
-      } else if (model.operationRangeId <= 0) {
-        this.showWarning('请选择营运范围')
-      } else if (model.busTypeId <= 0) {
-        this.showWarning('请选择车型')
-      } else if (model.operationDeptId <= 0) {
-        this.showWarning('请选择运营单位')
-      } else if (model.checkUnitId <= 0) {
-        this.showWarning('请选择结算单位')
       } else if (model.startTime === '') {
         this.showWarning('请选择启用日期')
       } else if (!this.long_use && model.endTime === '') {
@@ -263,18 +165,13 @@ export default {
       }
       this.model.mainBusPartnerId = model.mainBusPartnerId
       if (this.needSel) {
-        this.getParams(model.mainBusPartnerId).then(() => {
-          this.model = model
-          this.long_use = this.model.endTime === '9999-01-01 00:00:00'
-          this.watchMainBusPartner()
-        })
+        this.model = model
+        this.long_use = this.model.endTime === '9999-01-01 00:00:00'
       } else {
         this.model = model
         this.long_use = this.model.endTime === '9999-01-01 00:00:00'
-        this.watchMainBusPartner()
       }
     } else {
-      this.watchMainBusPartner()
     }
   }
 }
