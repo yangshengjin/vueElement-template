@@ -1,0 +1,46 @@
+// 将设置放入此文件中以覆盖默认设置
+{
+  // 窗口失去焦点自动保存
+  "files.autoSave": "onFocusChange",
+  // 编辑粘贴自动格式化
+  "editor.formatOnPaste": true,
+  // 控制字体系列。
+  // "editor.fontFamily": "pingfang,Menlo, Monaco, 'Courier New', monospace",
+  // 字体大小
+  "editor.fontSize": 16,
+  // 行高
+  "editor.lineHeight": 17,
+  // 通过使用鼠标滚轮同时按住 Ctrl 可缩放编辑器的字体
+  "editor.mouseWheelZoom": true,
+  // 行太长自动换行
+  "editor.wordWrap": "off",
+  //Windows bash终端"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  // 主体
+  // "workbench.colorTheme": "Monokai",
+  "workbench.iconTheme": "vscode-icons",
+  // eslint设置
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "vue",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  // 保存自动修复
+  "eslint.autoFixOnSave": true,
+  // css最后要有一个空行
+  // "vetur.format.css.preserve_newlines": false,
+  // vue格式化 函数前面有空格
+  // "vetur.format.js.InsertSpaceBeforeFunctionParenthesis": true,
+  // tab锁紧
+  "editor.tabSize": 2,
+  // 保存自动化
+  "editor.formatOnSave": true,
+  // 空格变成......
+  // "editor.renderWhitespace": "all",
+  "window.zoomLevel": 0,
+  "vsicons.dontShowNewVersionMessage": true
+}

@@ -5,12 +5,16 @@ export default {
   tableLoading (state, { isLoading }) { // loading的显示
     state.comm.tableLoading = isLoading
   },
+  // 获取菜单-保存菜单
   [types.GET_MENUS] (state, { menus }) {
     state.menus = menus
+    window.localStorage.setItem('menus', JSON.stringify(menus))
   },
-  [types.POST_LOGIN] (state, { UserInfo }) {
-    state.responseData['UserInfo'] = UserInfo
-    window.localStorage.setItem('UserInfo', JSON.stringify(UserInfo))
+  // 登录
+  [types.POST_LOGIN] (state, { UserInfo, loginParams }) {
+    const _userInfo = Object.assign(UserInfo, loginParams)
+    state.responseData['UserInfo'] = _userInfo
+    window.localStorage.setItem('UserInfo', JSON.stringify(_userInfo))
   },
   [types.POST_LOGIN_OUT] (state) {
     state.responseData['UserInfo'] = null

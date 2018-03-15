@@ -42,7 +42,9 @@
 
     <!-- 列表 -->
     <m-table :tableHeader="tableHeader" :tableData="tableData" @handleCurrentChange="handleCurrentChange" @handleSelectionChange="handleSelectionChange" @editRow="editRow" :pagingTotal="pagingTotal">
-
+      <template solt="temp" slot-scope="props">
+        <span v-if="props.prop === 'status'">{{props.scope.row[props.prop] === 1 ? '启用' : '停用'}}</span>
+      </template>
     </m-table>
 
     <!--
@@ -91,7 +93,7 @@ export default {
         { label: '车辆购置日期', width: '', prop: 'purchaseTime' },
         { label: '车辆属性', width: '', prop: 'propertyName' },
         { label: '车型', width: '', prop: 'busTypeName' },
-        { label: '状态', width: '', prop: 'status' },
+        { label: '状态', width: '', prop: 'status', scope: true },
         { label: '启用时间', width: '', prop: 'startTime' },
         { label: '停运时间', width: '', prop: 'endTime' },
         { label: '修改时间', width: '', prop: 'updatetime' },

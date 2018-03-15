@@ -7,7 +7,7 @@
     <el-form-item prop="checkPass">
       <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <!--<el-checkbox v-model="checked" checked style="margin:0px 0px 35px 0px;">记住密码</el-checkbox>-->
+    <el-checkbox v-model="rememberPwd" style="margin:0px 0px 35px 0px;">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="loading">登录</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
@@ -33,7 +33,7 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       },
-      checked: true
+      rememberPwd: false
     }
   },
   methods: {
@@ -47,17 +47,25 @@ export default {
       this.$refs.ruleForm2.validate(valid => {
         if (valid) {
           this.loading = true
-          const loginParams = { account: this.ruleForm2.account, pwd: this.ruleForm2.checkPass, code: '' }
+          const loginParams = { account: this.ruleForm2.account, pwd: this.ruleForm2.checkPass }
           this.PostLogin(loginParams).then(res => {
             this.loading = false
             if (res.status.code === 1) {
               this.showSuccess('登录成功')
-              let redirect = this.$route.query.redirect
-              if (redirect) {
-                this.$router.push({ path: redirect })
-              } else {
-                this.$router.push({ path: '/page1' })
+              // let redirect = this.$route.query.redirect
+              // if (redirect) {
+              //   this.$router.push({ path: redirect })
+              // } else {
+              //   this.$router.push({ path: '/page1' })
+              // }
+              // 保存账号密码
+              let obj = {
+                account: this.ruleForm2.account,
+                checkPass: ''
               }
+              if (this.rememberPwd) obj.checkPass = this.ruleForm2.checkPass
+              localStorage.setItem('loginParams', JSON.stringify(obj))
+              this.$router.push({ path: '/index' })
             } else {
               this.showError(res.status.desc)
             }
@@ -76,6 +84,14 @@ export default {
         _this.handleSubmit2()
       }
     })
+  },
+  created () {
+    let loginParams = localStorage.getItem('loginParams')
+    if (loginParams !== null && loginParams !== undefined) {
+      loginParams = JSON.parse(loginParams)
+      this.ruleForm2 = loginParams
+      if (loginParams.checkPass !== '') this.rememberPwd = true
+    }
   }
 }
 </script>
@@ -89,10 +105,10 @@ export default {
   -moz-border-radius: 5px;
   background-clip: padding-box;
   margin-bottom: 20px;
-  background-color: #F9FAFC;
+  background-color: #f9fafc;
   margin: 180px auto;
   width: 400px;
-  border: 2px solid #8492A6;
+  border: 2px solid #8492a6;
 }
 
 .title {

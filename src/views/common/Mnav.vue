@@ -1,13 +1,30 @@
 <template>
-  <div style="position: relative; height: 100%; width: 170px; transition: all 0.3s;" :class="transform ? 'aside-show': 'aside-hide'">
+  <div :class="['aside-containter',transform ? 'aside-show': 'aside-hide']">
     <div class="aside">
-      <el-menu :default-active="currentPath" :default-openeds="defaultOpeneds" router class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-        <template v-for="(nav, index) in menus" v-if="!nav.hidden">
-          <el-submenu :index="index+''" :key="index">
+      <el-menu :default-active="currentPath" :default-openeds="defaultOpeneds" router class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" background-color="#324157" text-color="#fff" active-text-color="#20a0ff">
+        <template v-for="nav in menus" v-if="!nav.hidden">
+          <el-menu-item :index="nav.url" v-if="!nav.children" :key="nav.id">
+            <i :class="nav.icon"></i>{{nav.name}}</el-menu-item>
+
+          <el-submenu :index="nav.id+''" v-if="nav.children" :key="nav.id">
             <template slot="title">
-              <i :class="nav.iconCls"></i>{{nav.name}}</template>
-            <el-menu-item v-for="child in nav.children" :key="child.id" :index="child.url" v-if="!child.hidden">{{child.name}}</el-menu-item>
+              <i :class="nav.icon"></i>{{nav.name}}
+            </template>
+
+            <template v-for="child in nav.children">
+              <el-menu-item :index="child.url" v-if="!child.children" :key="child.id">
+                {{child.name}}
+              </el-menu-item>
+
+              <el-submenu :index="child.id+''" v-if="child.children" :key="child.id">
+                <template slot="title">{{child.name}}</template>
+                <el-menu-item v-for="subchild in child.children" :key="subchild.id" :index="subchild.url" v-if="!subchild.hidden">{{subchild.name}}</el-menu-item>
+              </el-submenu>
+
+            </template>
+
           </el-submenu>
+
         </template>
       </el-menu>
     </div>
@@ -22,7 +39,7 @@ export default {
   props: ['currentPath'],
   data () {
     return {
-      defaultOpeneds: ['0', '1', '2', '3', '4'],
+      defaultOpeneds: [],
       transform: true
     }
   },
@@ -42,26 +59,41 @@ export default {
       // this.$router.push(key)
       // console.log(key, keyPath)
     },
+    // 展开菜单
+    openMenus () {
+      this.defaultOpeneds = []
+      this.menus.forEach((el) => {
+        this.defaultOpeneds.push(el.id + '')
+      })
+    },
+    // 折叠菜单
+    packupMenus () {
+      this.defaultOpeneds = []
+    },
     cuttleClick () {
       this.transform = false
     }
   },
   created () {
-    if (this.menus.length === 0) {
-      const menus = require('../../libs/menus').default
-      this.$store.commit('GET_MENUS', { menus: menus })
-    }
+    this.openMenus()
   }
 }
 </script>
 
 <style scoped lang="less">
+.aside-containter {
+  position: relative;
+  height: 100%;
+  width: 200px;
+  transition: all 0.3s;
+}
 .aside {
   width: 100%;
   overflow: auto;
   height: 100%;
   .el-menu {
     margin-bottom: 150px;
+    border: 0;
   }
 }
 .cuttle {
