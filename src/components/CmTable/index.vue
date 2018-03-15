@@ -51,7 +51,7 @@
 
     <!--分页-->
     <el-col v-show="pagingTotal >= 0" :span="24" class="pagina-toolbar">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" layout="total, prev, pager, next" :total="pagingTotal" style="float:right;">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="pageSize" layout="total, prev, pager, next" :total="pagingTotal" style="float:right;">
       </el-pagination>
     </el-col>
 

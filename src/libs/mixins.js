@@ -72,9 +72,6 @@ export default {
       // 返回
       this.$router.go(-1)
     },
-    parse (model) {
-      return JSON.parse(JSON.stringify(model))
-    },
     _getModel (model) {
       return JSON.parse(JSON.stringify(model))
     }

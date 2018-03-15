@@ -43,7 +43,7 @@
     <!-- 列表 -->
     <m-table :tableHeader="tableHeader" :tableData="tableData" @handleCurrentChange="handleCurrentChange" @handleSelectionChange="handleSelectionChange" @editRow="editRow" :pagingTotal="pagingTotal">
       <template solt="temp" slot-scope="props">
-        <span v-if="props.prop === 'status'">{{props.scope.row[props.prop] === 1 ? '启用' : '停用'}}</span>
+        <span v-if="props.prop === 'status'">{{props.scope.row[props.prop] | getUStatusDesc}}</span>
       </template>
     </m-table>
 
