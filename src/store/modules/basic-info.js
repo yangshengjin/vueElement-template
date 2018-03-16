@@ -1,4 +1,4 @@
-import common from '../../api/common'
+import $common from '../../api/common'
 import * as types from '../types'
 
 const state = {
@@ -16,7 +16,7 @@ const actions = {
   // 信息查询
   QueryBusInfo ({ commit, state }, params) {
     commit('tableLoading', { isLoading: true })
-    return common.QueryBusInfo(params).then((res) => {
+    return $common.QueryBusInfo(params).then((res) => {
       commit('tableLoading', { isLoading: false })
       if (res.list instanceof Array) {
         commit(types.QUERY_OLDER_LIST, { res })

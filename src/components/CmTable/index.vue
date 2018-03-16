@@ -259,6 +259,7 @@ export default {
 .el-table td,
 .el-table th {
   height: 32px;
+  padding: 4px 0;
 }
 // 颜色
 .u-icon-suc {

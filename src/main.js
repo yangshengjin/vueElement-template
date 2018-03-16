@@ -42,7 +42,7 @@ Vue.directive('numberOnly', {
  * 业务API -> 封装成全局变量
  */
 import common from './api/common'
-Vue.prototype.common = common
+Object.defineProperty(Vue.prototype, '$common', { value: common })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
