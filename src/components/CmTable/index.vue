@@ -36,7 +36,7 @@
 
       <el-table-column label="操作" width="50" v-if="showEditPanel">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click.native.prevent="editRow(scope.$index, tableData)">编辑</el-button>
+          <el-button type="text" size="small" @click.native.prevent="editRow(scope.$index, scope.row)">编辑</el-button>
         </template>
       </el-table-column>
 

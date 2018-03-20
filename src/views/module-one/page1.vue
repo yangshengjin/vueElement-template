@@ -138,8 +138,8 @@ export default {
       this.dialogVisible.status = true
     },
     editRow (i, data) { // 打开修改窗口
-      this.needSel = this.formModel.mainBusPartnerId !== data[i].mainBusPartnerId
-      this.formModel = data[i]
+      this.needSel = this.formModel.mainBusPartnerId !== data.mainBusPartnerId
+      this.formModel = data
       this.dialogVisible.status = true
     },
     handleCurrentChange (val) {  // 点击页码时触发
