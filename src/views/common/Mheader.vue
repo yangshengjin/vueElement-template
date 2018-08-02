@@ -1,18 +1,17 @@
 <template>
-  <div class="m-header">
-    <el-row class="panel-top">
-      <el-col :span="6">
-        <h2>车务管理系统</h2>
-      </el-col>
-      <el-col :span="18" class="rightbar">
-        <p>
-          <span style="padding-right: 15px">{{roleName}}
-            <em style="padding:0 5px">-</em>{{username}}</span>
-          <a href="javascript:" @click="logout">退出系统</a>
-        </p>
-      </el-col>
-    </el-row>
-  </div>
+  <el-header>
+    <h2 class="header-logo">车务管理系统</h2>
+    <ul class="header-operations">
+      <li>
+        {{roleName}}
+        <em style="padding:0 5px">-</em>
+        {{username}}
+      </li>
+      <li>
+        <a href="javascript:" @click="logout">退出系统</a>
+      </li>
+    </ul>
+  </el-header>
 </template>
 
 <script>
@@ -50,19 +49,23 @@ export default {
 </script>
 
 <style scope lang="less">
-@import '../../styles/themes.less';
-.panel-top {
-  background: @themes;
-  padding: 0 15px;
-  height: 60px;
-  line-height: 60px;
-  color: #ffffff;
-  .el-button--text {
-    color: #ffffff;
-  }
-  .rightbar {
-    text-align: right;
-    padding-right: 35px;
+.header-logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header-operations {
+  display: inline-block;
+  float: right;
+  padding-right: 30px;
+  height: 100%;
+  li {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+    margin: 0 5px;
+    line-height: 60px;
+    cursor: pointer;
     a {
       color: #ffffff;
     }

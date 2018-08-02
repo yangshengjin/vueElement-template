@@ -1,28 +1,21 @@
 <template>
   <div>
-    <el-row class="panel">
-      <el-col :span="24" class="panel-top">
-        <!-- 顶部 -->
-        <m-header></m-header>
-      </el-col>
+    <el-container>
+      <!-- 顶部 -->
+      <m-header class="panel-top"></m-header>
 
       <el-col :span="24" class="panel-center">
         <!-- 左部菜单 -->
         <m-nav :currentPath="currentPath"></m-nav>
-
         <!-- 中部内容区 -->
         <section class="panel-c-c">
-          <div class="grid-content bg-purple-light">
-
-            <el-col :span="24" style="background-color:#fff;box-sizing: border-box;">
-              <router-view></router-view>
-            </el-col>
-          </div>
+          <el-col :span="24" style="background-color:#fff;box-sizing: border-box;">
+            <router-view></router-view>
+          </el-col>
         </section>
-
       </el-col>
 
-    </el-row>
+    </el-container>
   </div>
 </template>
 
@@ -56,12 +49,15 @@ export default {
 }
 </script>
 
-<style>
-.panel {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
+<style lang="less">
+@import '../../styles/themes.less';
+.panel-top {
   width: 100%;
+  background: @themes;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  color: #ffffff;
 }
 
 .panel-center {

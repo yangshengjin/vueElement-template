@@ -1,7 +1,7 @@
 <template>
   <div :class="['aside-containter',transform ? 'aside-show': 'aside-hide']">
     <div class="aside">
-      <el-menu :default-active="currentPath" :default-openeds="defaultOpeneds" router class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" background-color="#324157" text-color="#fff" active-text-color="#20a0ff">
+      <el-menu :default-active="currentPath" :default-openeds="defaultOpeneds" router class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" background-color="#324157" text-color="#fff">
         <template v-for="nav in menus" v-if="!nav.hidden">
           <el-menu-item :index="nav.url" v-if="!nav.children" :key="nav.id">
             <i :class="nav.icon"></i>{{nav.name}}</el-menu-item>
